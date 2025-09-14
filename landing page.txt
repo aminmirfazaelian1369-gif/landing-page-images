@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت سفارش کیت‌های بهداشتی</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .card {
+            transition: all 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .vibrant-gradient {
+            background-image: linear-gradient(to right, #625D9B, #E06377);
+        }
+        .error-message {
+            transition: all 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div id="main-content" class="container mx-auto max-w-5xl">
+
+        <header class="text-center mb-12">
+            <!-- این لوگو توسط کاربر فراهم شده و در گیت‌هاب میزبانی می‌شود. -->
+            <img src="https://raw.githubusercontent.com/aminmirfazaelian1369-gif/landing-page-images/4e7348cf289d06c2b1b9fb2c520cbc9e1f93e8d9/IMG_1411.JPG" alt="لوگوی شرکت" class="mx-auto w-48 md:w-64 mb-8">
+        </header>
+
+        <section id="kit-selection" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <div id="kit-perio" class="card bg-white p-6 rounded-2xl shadow-md cursor-pointer text-center" onclick="selectKit('پریو')">
+                <div class="w-full h-32 rounded-lg mb-4">
+                    <img src="https://raw.githubusercontent.com/aminmirfazaelian1369-gif/landing-page-images/main/Screenshot%202025-09-14%20135025.png" alt="تصویر کیت بهداشتی" class="w-full h-full object-cover rounded-lg">
+                </div>
+                <h3 class="text-2xl font-bold text-[#FF6F61]">کیت پریو</h3>
+                <p class="mt-2 text-sm text-gray-500">مخصوص بیماران با مشکلات لثه</p>
+            </div>
+            <div id="kit-daily" class="card bg-white p-6 rounded-2xl shadow-md cursor-pointer text-center" onclick="selectKit('بهداشت روزانه')">
+                <div class="w-full h-32 rounded-lg mb-4">
+                    <img src="https://raw.githubusercontent.com/aminmirfazaelian1369-gif/landing-page-images/main/Screenshot%202025-09-14%20135025.png" alt="تصویر کیت بهداشتی" class="w-full h-full object-cover rounded-lg">
+                </div>
+                <h3 class="text-2xl font-bold text-[#FDCA40]">کیت بهداشت روزانه</h3>
+                <p class="mt-2 text-sm text-gray-500">کامل‌ترین کیت برای مراقبت روزانه</p>
+            </div>
+            <div id="kit-ortho" class="card bg-white p-6 rounded-2xl shadow-md cursor-pointer text-center" onclick="selectKit('ارتودنسی')">
+                <div class="w-full h-32 rounded-lg mb-4">
+                    <img src="https://raw.githubusercontent.com/aminmirfazaelian1369-gif/landing-page-images/main/Screenshot%202025-09-14%20135025.png" alt="تصویر کیت بهداشتی" class="w-full h-full object-cover rounded-lg">
+                </div>
+                <h3 class="text-2xl font-bold text-[#3DDC97]">کیت ارتودنسی</h3>
+                <p class="mt-2 text-sm text-gray-500">مخصوص بیماران ارتودنسی و براکت</p>
+            </div>
+            <div id="kit-kids" class="card bg-white p-6 rounded-2xl shadow-md cursor-pointer text-center" onclick="selectKit('اطفال')">
+                <div class="w-full h-32 rounded-lg mb-4">
+                    <img src="https://raw.githubusercontent.com/aminmirfazaelian1369-gif/landing-page-images/main/Screenshot%202025-09-14%20135025.png" alt="تصویر کیت بهداشتی" class="w-full h-full object-cover rounded-lg">
+                </div>
+                <h3 class="text-2xl font-bold text-[#00A6A6]">کیت اطفال</h3>
+                <p class="mt-2 text-sm text-gray-500">مناسب برای دندان‌های حساس کودکان</p>
+            </div>
+            <div id="kit-implant" class="card bg-white p-6 rounded-2xl shadow-md cursor-pointer text-center" onclick="selectKit('ایمپلنت')">
+                <div class="w-full h-32 rounded-lg mb-4">
+                    <img src="https://raw.githubusercontent.com/aminmirfazaelian1369-gif/landing-page-images/main/Screenshot%202025-09-14%20135025.png" alt="تصویر کیت بهداشتی" class="w-full h-full object-cover rounded-lg">
+                </div>
+                <h3 class="text-2xl font-bold text-[#625D9B]">کیت ایمپلنت</h3>
+                <p class="mt-2 text-sm text-gray-500">مخصوص مراقبت پس از کاشت ایمپلنت</p>
+            </div>
+        </section>
+
+        <section id="kit-details" class="bg-white p-8 rounded-2xl shadow-lg hidden">
+            <h2 class="text-3xl font-bold text-center mb-6 text-[#1B2A41]">اطلاعات خرید <span id="selected-kit-name" class="text-[#E06377]"></span></h2>
+            
+            <div class="flex flex-col md:flex-row items-center justify-center md:space-x-8 md:space-x-reverse mb-8">
+                <div class="w-48 h-48 rounded-lg flex items-center justify-center flex-shrink-0 mb-4 md:mb-0">
+                    <img src="https://raw.githubusercontent.com/aminmirfazaelian1369-gif/landing-page-images/main/Screenshot%202025-09-14%20135025.png" alt="تصویر کیت انتخابی" class="w-full h-full object-cover rounded-lg">
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-4xl md:text-5xl font-black text-[#F47B20] my-2">۴۹۰,۰۰۰ تومان</p>
+                    <p class="text-sm text-gray-500 line-through">۵۵۰,۰۰۰ تومان</p>
+                </div>
+            </div>
+
+            <form id="purchase-form" class="space-y-4 max-w-md mx-auto">
+                <div>
+                    <label for="name" class="block text-right text-gray-700 font-bold mb-1">نام و نام خانوادگی</label>
+                    <input type="text" id="name" placeholder="مثال: علی احمدی" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E06377]" required>
+                </div>
+                <div>
+                    <label for="phone" class="block text-right text-gray-700 font-bold mb-1">شماره موبایل</label>
+                    <input type="tel" id="phone" placeholder="مثال: ۰۹۱۲۳۴۵۶۷۸۹" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E06377]" required>
+                </div>
+                
+                <div class="mt-8 space-y-4">
+                    <button type="submit" class="w-full vibrant-gradient text-white text-xl font-bold py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#E06377]/50">
+                        ادامه و تأیید شماره موبایل
+                    </button>
+                    <button type="button" onclick="requestCall()" class="w-full bg-indigo-600 text-white text-xl font-bold py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-600/50">
+                         تماس بگیرید تا سفارش را ثبت کنید
+                    </button>
+                </div>
+
+                <div class="mt-4">
+                    <button type="button" onclick="goBack()" class="w-full text-center text-gray-600 font-bold py-2 rounded-full hover:bg-gray-200 transition-all duration-300">
+                        بازگشت به لیست کیت‌ها
+                    </button>
+                </div>
+            </form>
+        </section>
+        
+        <section id="verification-form" class="bg-white p-8 rounded-2xl shadow-lg hidden">
+            <h2 class="text-3xl font-bold text-center mb-6 text-[#1B2A41]">تأیید شماره موبایل</h2>
+            <p class="text-center text-gray-600 mb-6" id="verification-message">کد تأیید به شماره <span id="verification-phone" class="font-bold"></span> ارسال شد.</p>
+            <form class="space-y-4 max-w-md mx-auto" id="verify-form">
+                <div>
+                    <label for="code" class="block text-right text-gray-700 font-bold mb-1">کد تأیید</label>
+                    <input type="text" id="code" placeholder="کد ۴ رقمی را وارد کنید" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E06377]" required>
+                </div>
+                <div id="error-message" class="error-message text-red-500 font-bold text-center hidden">کد واردشده صحیح نیست.</div>
+                <div class="mt-6 text-center">
+                    <button type="submit" class="w-full vibrant-gradient text-white text-xl font-bold py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#E06377]/50">
+                        تأیید و پرداخت
+                    </button>
+                </div>
+                <div class="mt-4 flex flex-col items-center">
+                    <button type="button" onclick="goBackToForm()" class="w-full text-center text-gray-600 font-bold py-2 rounded-full hover:bg-gray-200 transition-all duration-300">
+                        بازگشت به اطلاعات سفارش
+                    </button>
+                    <button type="button" onclick="resendCode()" class="mt-2 w-full text-center text-gray-600 font-bold py-2 rounded-full hover:bg-gray-200 transition-all duration-300">
+                        ارسال مجدد کد
+                    </button>
+                </div>
+            </form>
+        </section>
+
+    </div>
+    
+    <div id="success-message" class="fixed top-8 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 opacity-0 transform -translate-y-full hidden">
+        <div class="flex items-center bg-green-500 text-white text-sm font-bold px-4 py-3 rounded-lg shadow-lg">
+            <svg class="w-6 h-6 ml-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm-2-8a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm4-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-4-4a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm4-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
+            <span>سفارش شما با موفقیت ثبت شد!</span>
+        </div>
+    </div>
+
+    <script>
+        let generatedCode = null;
+
+        function selectKit(kitName) {
+            document.getElementById('selected-kit-name').textContent = kitName;
+            document.getElementById('kit-selection').classList.add('hidden');
+            document.getElementById('kit-details').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goBack() {
+            document.getElementById('kit-selection').classList.remove('hidden');
+            document.getElementById('kit-details').classList.add('hidden');
+            document.getElementById('verification-form').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goBackToForm() {
+            document.getElementById('kit-details').classList.remove('hidden');
+            document.getElementById('verification-form').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function generateAndSendCode(phoneNumber) {
+            generatedCode = Math.floor(1000 + Math.random() * 9000); // 4-digit code
+            console.log(`کد تأیید شبیه‌سازی‌شده: ${generatedCode}`); // نمایش کد در کنسول
+            document.getElementById('verification-phone').textContent = phoneNumber;
+            document.getElementById('verification-message').textContent = `کد تأیید به شماره ${phoneNumber} ارسال شد.`;
+        }
+        
+        function resendCode() {
+            const phone = document.getElementById('phone').value;
+            if (phone) {
+                generateAndSendCode(phone);
+            }
+        }
+
+        function showSuccessMessage(message) {
+            const successMessage = document.getElementById('success-message');
+            const messageText = successMessage.querySelector('span');
+            messageText.textContent = message;
+
+            successMessage.classList.remove('hidden', 'opacity-0', '-translate-y-full');
+            successMessage.classList.add('opacity-100', 'translate-y-0');
+            
+            setTimeout(() => {
+                successMessage.classList.remove('opacity-100', 'translate-y-0');
+                successMessage.classList.add('opacity-0', '-translate-y-full');
+                setTimeout(() => {
+                    successMessage.classList.add('hidden');
+                }, 500);
+            }, 3000);
+        }
+        
+        function showErrorMessage(message) {
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = message;
+            errorMessage.classList.remove('hidden');
+            setTimeout(() => {
+                errorMessage.classList.add('hidden');
+            }, 3000);
+        }
+
+        document.getElementById('purchase-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+
+            if (!name || !phone) {
+                showErrorMessage('لطفاً نام و شماره موبایل را وارد کنید.');
+                return;
+            }
+
+            // Go to verification step
+            generateAndSendCode(phone);
+            document.getElementById('kit-details').classList.add('hidden');
+            document.getElementById('verification-form').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        function requestCall() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const kitName = document.getElementById('selected-kit-name').textContent;
+
+            if (!name || !phone) {
+                showErrorMessage('لطفاً نام و شماره موبایل را وارد کنید.');
+                return;
+            }
+
+            console.log(`سفارش جدید با درخواست تماس:`);
+            console.log(`کیت: ${kitName}`);
+            console.log(`نام: ${name}`);
+            console.log(`شماره موبایل: ${phone}`);
+            showSuccessMessage('سفارش شما ثبت شد. به زودی برای تکمیل سفارش با شما تماس گرفته خواهد شد.');
+            
+            // Reset and go back
+            document.getElementById('purchase-form').reset();
+            goBack();
+        }
+        
+        document.getElementById('verify-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const enteredCode = document.getElementById('code').value;
+
+            if (enteredCode === String(generatedCode)) {
+                console.log("کد تأیید صحیح است.");
+                showSuccessMessage('شماره شما تأیید و سفارش با موفقیت ثبت شد.');
+                document.getElementById('purchase-form').reset();
+                document.getElementById('verify-form').reset();
+                goBack();
+            } else {
+                showErrorMessage('کد وارد شده صحیح نیست. دوباره تلاش کنید.');
+            }
+        });
+    </script>
+</body>
+</html>
